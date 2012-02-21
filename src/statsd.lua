@@ -1,40 +1,42 @@
+require "socket"
+
 function statsd(host, port)
   local Statsd = { 
-    ip = ip, 
+    ip = assert(socket.dns.toip(host)),
     port = port,
     udp = socket.udp(),
     timers = {}
   }
 
   function Statsd:recordMetric(name, value, type) 
-    udp:sendto(name .. ":" .. value .. "|" .. type, ip, port) 
+    Statsd.udp:sendto(name .. ":" .. value .. "|" .. type, Statsd.ip, Statsd.port) 
   end
 
   function Statsd:resetTimers() 
-    timers = {} 
+    Statsd.timers = {} 
   end
    
   function Statsd:recordCount(name, value, frequency) 
-    return recordMetric(name,value, (frequency and "c|@"..frequency) or "c") 
+    return Statsd:recordMetric(name,value, (frequency and "c|@"..frequency) or "c") 
   end
 
   function Statsd:recordTime(name, value) 
-    return recordMetric(name, value, "ms") 
+    return Statsd:recordMetric(name, value, "ms") 
   end
 
   function Statsd:startTimer(name)
-    if timers[name] == nil then 
-      timers[name] = (socket.gettime()*1000)
+    if Statsd.timers[name] == nil then 
+      Statsd.timers[name] = (socket.gettime()*1000)
       return true
     end
     return false
   end
 
   function Statsd:stopTimer(name) 
-    if timers[name] ~= nil then
-      local elapsed = ((socket.gettime()*1000)-timers[name])
-      metrics.recordTime(name, elapsed);
-      timers[name] = nil
+    if Statsd.timers[name] ~= nil then
+      local elapsed = ((socket.gettime()*1000)-Statsd.timers[name])
+      Statsd:recordTime(name, elapsed);
+      Statsd.timers[name] = nil
       return elapsed
     else
       return false
