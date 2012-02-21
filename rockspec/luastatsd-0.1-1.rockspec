@@ -17,6 +17,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      ['moai.msleep'] = "src/moai/sleep.c"
+      statsd = "src/statsd.lua"
    }
 }

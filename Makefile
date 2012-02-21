@@ -13,7 +13,7 @@ build:
 	cd tmp && unzip luastatsd-${VERSION}.zip && rm -rf luastatsd-${VERSION}/rockspec && tar -czvpf ${TAR_FILE} luastatsd-${VERSION}
 
 dist: build
-	cd tmp && luastatsd pack luastatsd-${VERSION}-${REVISION}.rockspec
+	cd tmp && luarocks pack ../rockspec/luastatsd-${VERSION}-${REVISION}.rockspec
 
 clean:
 	rm -rf tmp
