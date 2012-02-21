@@ -12,7 +12,8 @@ description = {
    license = ""
 }
 dependencies = {
-   "lua >= 5.1"
+   "lua >= 5.1",
+   "luasocket >= 2.0.2"
 }
 build = {
    type = "builtin",
