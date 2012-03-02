@@ -1,12 +1,17 @@
 package = "LuaStatsd"
 version = "0.1-1"
 source = {
-   url = "https://github.com/downloads/moai/luastatsd/luastatsd-0.1-1.tar.gz"
+    url= "git://github.com/moai/luastatsd.git",
+    branch= "master"
 }
 description = {
    summary = "A lua interface to a statsd server",
    detailed = [[
-      
+  luastatsd is a lua client library to the etsy/statsd statistics daemon.
+
+  For more info, see :
+    * http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/
+    * https://github.com/etsy/statsd      
    ]],
    homepage = "http://github.com/moai/luastatsd",
    license = ""

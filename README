@@ -1,0 +1,47 @@
+About
+---------------------------------------------------------------------------------
+
+  luastatsd is a lua client library to the etsy/statsd statistics daemon.
+
+  For more info, see :
+    * http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/
+    * https://github.com/etsy/statsd
+
+---------------------------------------------------------------------------------
+
+Usage
+---------------------------------------------------------------------------------
+
+To use this library you must first have a statsd server running on your network.  
+
+Before you can use the library it must be initialized with the host and port of 
+your statsd server
+
+require 'statsd'
+
+metrics = statsd(host, port)
+
+To record a count of an event:
+
+metrics:recordCount(metric-name, value, frequency)
+
+To time a block of code:
+
+metrics:startTimer(timerName)
+
+... code ...
+
+metrics:stopTimer(timerName)
+
+Then initialize the library with the host and port of your statsd server:
+
+---------------------------------------------------------------------------------
+
+Copyright
+---------------------------------------------------------------------------------
+
+  This code is Copyright 2012 Zipline Games LLC.
+
+  See the accompanying LICENSE file for use and distribution legalese.
+
+---------------------------------------------------------------------------------
